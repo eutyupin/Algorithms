@@ -4,21 +4,18 @@ public class Main {
     public static void main(String[] args) {
         System.out.println(WordsReverse.returnReverseWord("Hello World!"));
 
-
-
-       ////
-        MyQueue<Integer> queue = new MyQueue<>();
-        for (int i = 0; i < 15; i++) {
-            queue.insert(i);
-        }
-
-        System.out.println(queue.remove());
-        System.out.println(queue.remove());
-        queue.insert(77);
-        queue.insert(99);
-        while (!queue.isEmpty()) {
-            System.out.println(queue.remove());
-        }
+        MyDeQueue<Integer> deQueue = new MyDeQueue<>();
+        deQueue.insertRight(65);
+        deQueue.insertRight(65);
+        deQueue.insertRight(65);
+        deQueue.insertRight(65);
+        deQueue.insertRight(45);
+        deQueue.insertLeft(11);
+        deQueue.insertLeft(17);
+        System.out.println("remove left: " + deQueue.removeLeft());
+        System.out.println("remove right: " + deQueue.removeRight());
+        System.out.println(deQueue.peekLeft());
+        System.out.println(deQueue.peekRight());
 
     }
 }

@@ -32,8 +32,6 @@ public class MyQueue<T> {
     private void extendQueueListSize() {
         int newSize = (int) (size * 1.5) + 1;
         T[] tempQueueContainer = (T[]) new Object[newSize];
-        System.out.println("firstElement: " + firstElement);
-        System.out.println();
         if (firstElement < lastElement) {
             System.arraycopy(queueList,firstElement,tempQueueContainer,0,lastElement - firstElement);
         }
@@ -47,9 +45,6 @@ public class MyQueue<T> {
         }
         firstElement = 0;
         lastElement = size;
-        System.out.println("lastElement: " + lastElement);
-        System.out.println("Size: " + size);
-
         queueList = tempQueueContainer;
     }
 
