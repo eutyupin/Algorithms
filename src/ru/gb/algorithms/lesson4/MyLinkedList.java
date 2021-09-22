@@ -1,9 +1,16 @@
 package ru.gb.algorithms.lesson4;
 
-public class MyLinkedList<T> {
+import java.util.Iterator;
+
+public class MyLinkedList<T> implements Iterable<T>{
     private Node first;
     private Node last;
     private int size;
+
+    @Override
+    public Iterator<T> iterator() {
+        return new Iter();
+    }
 
     public void insertFirst(T item) {
         Node newNode = new Node(item, first);
@@ -28,9 +35,6 @@ public class MyLinkedList<T> {
     }
 
     public T removeFirst() {
-//        if(isEmpty()) {
-//            throw new RuntimeException("List is empty");
-//        }
         T temp = getFirst();
         first = first.getNext();
         if (isEmpty()) {
@@ -147,8 +151,6 @@ public class MyLinkedList<T> {
         return size;
     }
 
-
-
     private class Node {
         T value;
         Node next;
@@ -187,6 +189,21 @@ public class MyLinkedList<T> {
 
         public void setNext(Node next) {
             this.next = next;
+        }
+    }
+
+    private class Iter implements Iterator<T> {
+        Node current = new Node(null,null, first);
+
+        @Override
+        public boolean hasNext() {
+            return current.getNext() != null;
+        }
+
+        @Override
+        public T next() {
+            current = current.getNext();
+            return current.getValue();
         }
     }
 }
