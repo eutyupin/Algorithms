@@ -77,6 +77,11 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.right = put(node.right, key, value);
         }
         node.size = size(node.left) + size(node.right) + 1;
+
+        if (height(node.left) > height(node.right)) node.height = height(node.left) + 1;
+        else if (height(node.left) < height(node.right)) node.height = height(node.right) + 1;
+        else node.height = height(node.right) + 1;
+
         return node;
     }
 
@@ -107,6 +112,11 @@ public class MyTreeMap<K extends Comparable<K>, V> {
         if (node.left == null) return node.right;
         node.left = removeMin(node.left);
         node.size = size(node.left) + size(node.right) + 1;
+
+        if (height(node.left) > height(node.right)) node.height = height(node.left) + 1;
+        else if (height(node.left) < height(node.right)) node.height = height(node.right) + 1;
+        else node.height = height(node.right) + 1;
+
         return node;
     }
 
@@ -135,6 +145,11 @@ public class MyTreeMap<K extends Comparable<K>, V> {
             node.left = temp.left;
         }
         node.size = size(node.left) + size(node.right) + 1;
+
+        if (height(node.left) > height(node.right)) node.height = height(node.left) + 1;
+        else if (height(node.left) < height(node.right)) node.height = height(node.right) + 1;
+        else node.height = height(node.right) + 1;
+
         return node;
     }
 
@@ -150,6 +165,18 @@ public class MyTreeMap<K extends Comparable<K>, V> {
                 toString(node.right);
     }
 
+    public boolean isBalanced() {
+        return isBalanced(root);
+    }
+
+    private boolean isBalanced(Node node) {
+        if (node == null) return false;
+        if (node.left != null && node.right != null && (node.left.height == node.right.height || node.left.height == node.right.height + 1 ||
+                node.right.height == node.left.height + 1 || node.left.height == node.right.height - 1 ||
+                node.right.height == node.left.height - 1)) return true;
+        else if (isBalanced(node.left) == true && isBalanced(node.right) == true ) return true;
+        else return false;
+    }
 
     private class Node {
         K key;
